@@ -1,4 +1,4 @@
-package org.sopt.seminar2;
+package org.sopt.soptreport2;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class Seminar2ApplicationTests {
+public class Soptreport2ApplicationTests {
 
     @Test
     public void contextLoads() {
