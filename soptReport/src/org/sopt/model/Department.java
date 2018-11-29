@@ -18,12 +18,20 @@ public class Department extends University{
     }
 
     public Department(final long departIdx, final String departName, final long callNum, final String departType){
+        super();
         this.departIdx = departIdx;
         this.departName = departName;
         this.callNum = callNum;
         this.departType = departType;
     }
 
+    public Department(int univNum, String univName, long univPhone, String univAddress, long departIdx, String departName, long callNum, String departType) {
+        super(univNum, univName, univPhone, univAddress);
+        this.departIdx = departIdx;
+        this.departName = departName;
+        this.callNum = callNum;
+        this.departType = departType;
+    }
 
     public long getDepartIdx() {
         return departIdx;

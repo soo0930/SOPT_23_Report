@@ -32,8 +32,21 @@ public class Student extends Department {
     //Constructor
     public Student(final int studentNum, final String studentName, final int grade, final String department,
                    final String studentEmail, final String studentAddress, final int studentAge, final String state){
+        super();
         this.studentName = studentName;
         this.studentNum = studentNum;
+        this.grade = grade;
+        this.department = department;
+        this.studentEmail = studentEmail;
+        this.studentAddress = studentAddress;
+        this.studentAge = studentAge;
+        this.state = state;
+    }
+
+    public Student(int univNum, String univName, long univPhone, String univAddress, long departIdx, String departName, long callNum, String departType, int studentNum, String studentName, int grade, String department, String studentEmail, String studentAddress, int studentAge, String state) {
+        super(univNum, univName, univPhone, univAddress, departIdx, departName, callNum, departType);
+        this.studentNum = studentNum;
+        this.studentName = studentName;
         this.grade = grade;
         this.department = department;
         this.studentEmail = studentEmail;

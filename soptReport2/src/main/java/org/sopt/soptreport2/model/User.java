@@ -39,4 +39,13 @@ public class User {
     public void setPart(String part) {
         this.part = part;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "user_idx=" + user_idx +
+                ", name='" + name + '\'' +
+                ", part='" + part + '\'' +
+                '}';
+    }
 }

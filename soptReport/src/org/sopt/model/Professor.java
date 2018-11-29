@@ -22,6 +22,16 @@ public class Professor extends Department {
 
     public Professor(final int professorIdx, final String professorName,
                      final String department, final long professorPhone, final String subject ){
+        super();
+        this.professorIdx = professorIdx;
+        this.professorName = professorName;
+        this.department = department;
+        this.professorPhone = professorPhone;
+        this.subject = subject;
+    }
+
+    public Professor(int univNum, String univName, long univPhone, String univAddress, long departIdx, String departName, long callNum, String departType, int professorIdx, String professorName, String department, long professorPhone, String subject) {
+        super(univNum, univName, univPhone, univAddress, departIdx, departName, callNum, departType);
         this.professorIdx = professorIdx;
         this.professorName = professorName;
         this.department = department;

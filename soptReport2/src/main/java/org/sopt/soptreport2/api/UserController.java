@@ -18,31 +18,58 @@ public class UserController {
         return date();
     }
 
-    //현재 리스트에 등록된 모든 회원 데이터 반환
     @GetMapping("/users")
-    public List<User> all(){ return userList; }
-
-    //현재 리스트에서 같은 이름의 회원이 있는지 검색, 있으면 회원 데이터 반환 없으면 "없습니다" 반환
-    //users?name="이름"
-    @GetMapping("/usersName")
-    public String findByName(@RequestParam(value="name", defaultValue = "") final String name) {
-        for(User u: userList){
-            if(name == u.getName())
-                return "ID: " + u.getUser_idx() + " 이름: " + u.getName() + " 파트: " + u.getPart();
+    public String getUserList(
+            @RequestParam(value = "name", defaultValue = "") final String name,
+            @RequestParam(value = "part", defaultValue = "") final String part
+    ){
+        if(!name.equals("")){
+            for(User u : userList){
+                if(u.getName().equals(name)) return u.toString();
+            }
+            return "없습니다.";
+        }else if(!part.equals("")){
+            for(User u: userList){
+                if(u.getPart().equals(part)) return u.toString();
+            }
+            return "없습니다.";
         }
-        return "없습니다.";
-    }
-
-    //현재 리스트에서 같은 파트의 회원이 있는지 검색, 있으면 "
-    //users?part="파트"
-    @GetMapping("/usersPart")
-    public String findByPart(@RequestParam(value = "part", defaultValue = "") final String part){
-        for(User u: userList){
-            if(part == u.getPart())
-                return "ID: " + u.getUser_idx() + " 이름: " + u.getName() + " 파트: " + u.getPart();
+        else{
+            if(userList.isEmpty()) return "리스트가 비었습니다.";
+            else{
+                StringBuilder sb = new StringBuilder();
+                for(User u: userList){
+                    sb.append(u.toString()).append("/n");
+                }
+                return sb.toString();
+            }
         }
-        return "없습니다.";
     }
+//    /*1번*/
+//    @GetMapping("/users")
+//    public List<User> ul(){
+//        return userList;    //리스트가 비어 있으면 [] 으로 출력 됨.
+//    }
+//
+//    @GetMapping("/users")
+//    public String getUserList(
+//            @RequestParam(value = "name", defaultValue = "") final String name,
+//            @RequestParam(value = "part", defaultValue = "") final String part
+//    ) {
+//        if (!name.equals("")) {
+//            for (User u : userList) {
+//                if (u.getName().equals(name)) return u.toString();
+//            }
+//            return "없습니다.";
+//        } else if (!part.equals("")) {
+//            for (User u : userList) {
+//                if (u.getPart().equals(part)) return u.toString();
+//            }
+//            return "없습니다.";
+//        }else{
+//            return
+//        }
+//    }
 
     //현재 리스트에서 회원 id값으로 회원 검색, 있으면 회원 데이터 반환 / 없으면 "없습니다" 반환
     ///users/{user_idx}
@@ -51,6 +78,7 @@ public class UserController {
         for(User u: userList){
             if(u.getUser_idx() == user_idx)
                 return "ID: " + u.getUser_idx() + " 이름: " + u.getName() + " 파트: " + u.getPart();
+            //return u.toString();
         }
         return "없습니다.";
     }
@@ -64,7 +92,8 @@ public class UserController {
 
     //회원 정보 수정
     @PutMapping("/users/{user_idx}")
-    public String updateUser(@RequestBody int user_idx, User user){
+    public String updateUser(@PathVariable(value = "user_idx", required = false) final int user_idx,
+                             @RequestBody final User user){
         for(User u : userList){
             if(u.getUser_idx() == user_idx){
                 userList.remove(u);
@@ -77,7 +106,7 @@ public class UserController {
 
     //회원 삭제
     @DeleteMapping("/users/{user_idx}")
-    public String deleteUser(@RequestBody int user_idx){
+    public String deleteUser(@PathVariable(value = "user_idx", required = false) final int user_idx){
         for(User u: userList){
             if(u.getUser_idx() == user_idx)
                 userList.remove(u);
